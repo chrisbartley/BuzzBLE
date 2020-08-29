@@ -6,8 +6,8 @@
         "repositoryURL": "git@github.com:BirdBrainTechnologies/BirdbrainBLE.git",
         "state": {
           "branch": null,
-          "revision": "6ea0cab7bc5e94a55d885d66ee4ffed8cfde95ed",
-          "version": "0.6.0"
+          "revision": "1f048c7d44f126ef54947ff74d25c0c5a88f6459",
+          "version": "0.6.1"
         }
       }
     ]
