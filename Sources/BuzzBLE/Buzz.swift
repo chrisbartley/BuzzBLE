@@ -49,6 +49,10 @@ public class Buzz: ManageableUARTDevice {
    private let responseProcessor: BuzzResponseProcessor
    private let blePeripheral: BLEPeripheral
 
+   private var mtu: Int {
+      blePeripheral.maximumWriteWithoutResponseDataLength()
+   }
+
    //MARK: - Initializers
 
    required public init(blePeripheral: BLEPeripheral) {
