@@ -3,7 +3,7 @@
     "pins": [
       {
         "package": "BirdbrainBLE",
-        "repositoryURL": "git@github.com:BirdBrainTechnologies/BirdbrainBLE.git",
+        "repositoryURL": "git@github.com:chrisbartley/BirdbrainBLE.git",
         "state": {
           "branch": null,
           "revision": "1f048c7d44f126ef54947ff74d25c0c5a88f6459",

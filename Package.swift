@@ -8,13 +8,12 @@ let package = Package(
          .iOS(.v10), .macOS(.v10_14)
       ],
       products: [
-         // Products define the executables and libraries produced by a package, and make them visible to other packages.
          .library(
                name: "BuzzBLE",
                targets: ["BuzzBLE"]),
       ],
       dependencies: [
-         .package(url: "git@github.com:BirdBrainTechnologies/BirdbrainBLE.git", "0.6.0"..<"0.7.0")
+         .package(url: "git@github.com:chrisbartley/BirdbrainBLE.git", "0.6.0"..<"0.7.0")
       ],
       targets: [
          .target(
