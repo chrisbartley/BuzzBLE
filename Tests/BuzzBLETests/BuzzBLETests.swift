@@ -24,7 +24,7 @@ final class BuzzBLETests: XCTestCase {
    private func runAdditionalTests(additionalTestsTimeout: TimeInterval = 5, _ additionalTests: (Buzz, XCTestExpectation) -> Void) {
 
       let delegate = ConnectDisconnectBuzzManagerDelegate(self)
-      let buzzManager = BuzzManager(scanFilter: Buzz.scanFilter, delegate: delegate)
+      let buzzManager = BuzzManager(delegate: delegate)
 
       // Wait for the enabled expectation to be fulfilled, or timeout after 5 seconds
       print("Waiting for the glow board manager to be enabled...")
@@ -79,7 +79,7 @@ final class BuzzBLETests: XCTestCase {
 
    func testDeviceDisappearanceSuccess() {
       let delegate = DisappearBuzzManagerDelegate(self)
-      let buzzManager = BuzzManager(scanFilter: Buzz.scanFilter, delegate: delegate)
+      let buzzManager = BuzzManager(delegate: delegate)
 
       // Wait for the enabled expectation to be fulfilled, or timeout after 5 seconds
       print("Waiting for BuzzManager to be enabled...")

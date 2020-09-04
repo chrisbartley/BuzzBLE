@@ -32,12 +32,12 @@ public class BuzzManager {
 
    //MARK: - Initializers
 
-   convenience public init(scanFilter: UARTDeviceScanFilter, delegate: BuzzManagerDelegate) {
+   convenience public init(delegate: BuzzManagerDelegate, scanFilter: UARTDeviceScanFilter = Buzz.scanFilter) {
       self.init(scanFilter: scanFilter)
       self.delegate = delegate
    }
 
-   public init(scanFilter: UARTDeviceScanFilter) {
+   public init(scanFilter: UARTDeviceScanFilter = Buzz.scanFilter) {
       self.scanFilter = scanFilter
       bleCentralManager = StandardBLECentralManager(servicesAndCharacteristics: UARTDeviceServicesAndCharacteristics.instance)
       bleCentralManager.delegate = self
