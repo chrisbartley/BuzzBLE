@@ -5,21 +5,42 @@
 import Foundation
 
 public protocol BuzzDelegate: class {
-   func buzz(_ device: Buzz, isCommunicationEnabled: Bool, error: Error?)
+   func buzz(_ buzz: Buzz, isCommunicationEnabled: Bool, error: Error?)
 
-   func buzz(_ device: Buzz, isAuthorized: Bool, errorMessage: String?)
+   func buzz(_ buzz: Buzz, isAuthorized: Bool, errorMessage: String?)
 
-   func buzz(_ device: Buzz, batteryInfo: Buzz.BatteryInfo)
-   func buzz(_ device: Buzz, deviceInfo: Buzz.DeviceInfo)
-   func buzz(_ device: Buzz, isMicEnabled: Bool)
-   func buzz(_ device: Buzz, areMotorsEnabled: Bool)
-   func buzz(_ device: Buzz, isMotorsQueueCleared: Bool)
+   func buzz(_ buzz: Buzz, batteryInfo: Buzz.BatteryInfo)
+   func buzz(_ buzz: Buzz, deviceInfo: Buzz.DeviceInfo)
+   func buzz(_ buzz: Buzz, isMicEnabled: Bool)
+   func buzz(_ buzz: Buzz, areMotorsEnabled: Bool)
+   func buzz(_ buzz: Buzz, isMotorsQueueCleared: Bool)
 
-   func buzz(_ device: Buzz, responseError error: Error)
-   func buzz(_ device: Buzz, unknownCommand command: String)
-   func buzz(_ device: Buzz, badRequestFor command: Buzz.Command, errorMessage: String?)
-   func buzz(_ device: Buzz, failedToParse responseMessage: String, forCommand command: Buzz.Command)
+   func buzz(_ buzz: Buzz, responseError error: Error)
+   func buzz(_ buzz: Buzz, unknownCommand command: String)
+   func buzz(_ buzz: Buzz, badRequestFor command: Buzz.Command, errorMessage: String?)
+   func buzz(_ buzz: Buzz, failedToParse responseMessage: String, forCommand command: Buzz.Command)
 }
 
 public extension BuzzDelegate {
+   func buzz(_ buzz: Buzz, isCommunicationEnabled: Bool, error: Error?) {}
+
+   func buzz(_ buzz: Buzz, isAuthorized: Bool, errorMessage: String?) {}
+
+   func buzz(_ buzz: Buzz, batteryInfo: Buzz.BatteryInfo) {}
+
+   func buzz(_ buzz: Buzz, deviceInfo: Buzz.DeviceInfo) {}
+
+   func buzz(_ buzz: Buzz, isMicEnabled: Bool) {}
+
+   func buzz(_ buzz: Buzz, areMotorsEnabled: Bool) {}
+
+   func buzz(_ buzz: Buzz, isMotorsQueueCleared: Bool) {}
+
+   func buzz(_ buzz: Buzz, responseError error: Error) {}
+
+   func buzz(_ buzz: Buzz, unknownCommand command: String) {}
+
+   func buzz(_ buzz: Buzz, badRequestFor command: Buzz.Command, errorMessage: String?) {}
+
+   func buzz(_ buzz: Buzz, failedToParse responseMessage: String, forCommand command: Buzz.Command) {}
 }
