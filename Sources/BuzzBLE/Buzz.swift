@@ -207,7 +207,7 @@ extension Buzz: BuzzResponseProcessorDelegate {
                }
 
             case .accept:
-               delegate?.buzz(self, isAuthorized: responseMessage.isOK, errorMessage: responseMessage.message)
+               delegate?.buzz(self, isAuthorized: responseMessage.isOK, errorMessage: responseMessage.isOK ? nil : responseMessage.message)
 
             case .batteryInfo:
                do {
