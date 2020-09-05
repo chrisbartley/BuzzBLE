@@ -160,7 +160,7 @@ extension Buzz: BLEPeripheralDelegate {
             return
          }
 
-         os_log("BLEPeripheralDelegate.didUpdateValueFor uuid=%s, value=%s", log: OSLog.log, type: .debug, characteristicUUID.uuidString, String(describing: value))
+         // os_log("BLEPeripheralDelegate.didUpdateValueFor uuid=%s, value=%s", log: OSLog.log, type: .debug, characteristicUUID.uuidString, String(describing: value))
 
          // convert the response data to a string, then hand it off to the response processor
          let responseStr = String(decoding: responseData, as: UTF8.self)
