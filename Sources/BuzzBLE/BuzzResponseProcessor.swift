@@ -26,7 +26,7 @@ class BuzzResponseProcessor {
       // append the new to what we already have acquired but didn't consume
       remainingResponse += newResponse
 
-      // Start by splitting on the ending delimiter, resuling in N pieces.  This should yield N-1 complete responses.
+      // Start by splitting on the ending delimiter, resulting in N pieces.  This should yield N-1 complete responses.
       let responses = remainingResponse.components(separatedBy: BuzzResponseProcessor.endDelimiter)
 
       // loop over all the pieces, but we skip the last one because it's guaranteed to not contain a complete response
