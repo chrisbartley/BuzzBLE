@@ -14,6 +14,8 @@ fileprivate extension OSLog {
 public class Buzz: ManageableUARTDevice {
 
    public enum Command: String, CaseIterable, CustomStringConvertible {
+      fileprivate static let commandTerminator = "\n"
+
       case authAsDeveloper = "auth as developer\n"
       case accept = "accept\n"
       case batteryInfo = "device battery_soc\n"
@@ -103,6 +105,17 @@ public class Buzz: ManageableUARTDevice {
 
    public func clearMotorsQueue() {
       sendCommand(Buzz.Command.clearMotorsQueue)
+   }
+
+   public func setMotorVibration(_ motor0: UInt8, _ motor1: UInt8, _ motor2: UInt8, _ motor3: UInt8) {
+      sendMotorsCommand(data: [motor0, motor1, motor2, motor3])
+   }
+
+   public func sendMotorsCommand(data: [UInt8]) {
+      // TODO: Make this not crap.  Add array size check, etc.
+      let encodedMotorData = Data(data).base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))
+      let command = Buzz.Command.vibrateMotors.description + " " + encodedMotorData + Buzz.Command.commandTerminator
+      writeWithoutResponse(bytes: Array(command.utf8))
    }
 
    @discardableResult

@@ -360,6 +360,92 @@ final class BuzzBLETests: XCTestCase {
       }
    }
 
+   func testSendMotorsCommand() {
+      runAdditionalTests(additionalTestsTimeout: 5) { (buzz, testsDoneExpectation) in
+
+         // enable communication
+         let commEnabledDelegate = IsCommunicationEnabledDelegate(self)
+         buzz.delegate = commEnabledDelegate
+         buzz.enableCommuication()
+         commEnabledDelegate.waitForIsCommunicationEnabledExpectation()
+
+         // authorize
+         print("Authorizing...")
+         let authDelegate = IsAuthorizedDelegate(self)
+         buzz.delegate = authDelegate
+         buzz.authorize()
+         authDelegate.waitForIsAuthorizedExpectation()
+         XCTAssertTrue(authDelegate.isAuthorized)
+         print("Authorization successful!")
+
+         let motorsQueueClearedDelegate = IsMotorsQueueClearedDelegate(self)
+         buzz.delegate = motorsQueueClearedDelegate
+
+         print("Disable mic")
+         buzz.disableMic()
+
+         print("Enable motors")
+         buzz.enableMotors()
+
+         print("Clear motors queue")
+         buzz.clearMotorsQueue()
+         motorsQueueClearedDelegate.waitForIsMotorsQueueClearedExpectation()
+         XCTAssertNotNil(motorsQueueClearedDelegate.isMotorsQueueCleared)
+         XCTAssertTrue(motorsQueueClearedDelegate.isMotorsQueueCleared!)
+
+         print("Vibrate the motors...")
+         buzz.sendMotorsCommand(data: [
+            32, 0, 0, 0,
+            0, 32, 0, 0,
+            0, 0, 32, 0,
+            0, 0, 0, 32,
+            0, 0, 0, 0,
+            64, 0, 0, 0,
+            0, 64, 0, 0,
+            0, 0, 64, 0,
+            0, 0, 0, 64,
+            0, 0, 0, 0,
+            96, 0, 0, 0,
+            0, 96, 0, 0,
+            0, 0, 96, 0,
+            0, 0, 0, 96,
+            0, 0, 0, 0,
+            128, 0, 0, 0,
+            0, 128, 0, 0,
+            0, 0, 128, 0,
+            0, 0, 0, 128,
+            0, 0, 0, 0,
+            160, 0, 0, 0,
+            0, 160, 0, 0,
+            0, 0, 160, 0,
+            0, 0, 0, 160,
+            0, 0, 0, 0,
+            192, 0, 0, 0,
+            0, 192, 0, 0,
+            0, 0, 192, 0,
+            0, 0, 0, 192,
+            0, 0, 0, 0,
+            224, 0, 0, 0,
+            0, 224, 0, 0,
+            0, 0, 224, 0,
+            0, 0, 0, 224,
+            0, 0, 0, 0,
+            255, 0, 0, 0,
+            0, 255, 0, 0,
+            0, 0, 255, 0,
+            0, 0, 0, 255,
+            0, 0, 0, 0,
+         ])
+
+         sleep(1)
+
+         DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
+            print("[\(Date().timeIntervalSince1970)]: Calling testsDoneExpectation.fulfill()")
+            testsDoneExpectation.fulfill()
+         })
+      }
+   }
+
    static var allTests = [
       ("testLinuxTestSuiteIncludesAllTests", testLinuxTestSuiteIncludesAllTests),
       ("testDeviceDisappearanceSuccess", testDeviceDisappearanceSuccess),
@@ -371,5 +457,6 @@ final class BuzzBLETests: XCTestCase {
       ("testEnableDisableMic", testEnableDisableMic),
       ("testEnableDisableMotors", testEnableDisableMotors),
       ("testClearMotorsQueue", testClearMotorsQueue),
+      ("testSendMotorsCommand", testSendMotorsCommand),
    ]
 }
