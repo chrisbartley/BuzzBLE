@@ -42,6 +42,9 @@ public class Buzz: ManageableUARTDevice {
       blePeripheral.uuid
    }
 
+   /// Cached copy of device info, stored after calling requestDeviceInfo(), merely for convenience.
+   public var deviceInfo: DeviceInfo?
+
    public weak var delegate: BuzzDelegate?
 
    //MARK: - Private Properties
@@ -220,6 +223,9 @@ extension Buzz: BuzzResponseProcessorDelegate {
             case .deviceInfo:
                do {
                   let deviceInfo = try decoder.decode(Buzz.DeviceInfo.self, from: jsonData)
+
+                  // cache the device info since it's unlikely to change, then notify the delegate
+                  self.deviceInfo = deviceInfo
                   delegate?.buzz(self, deviceInfo: deviceInfo)
                }
                catch {
