@@ -5,33 +5,36 @@
 import Foundation
 
 public protocol BuzzManagerDelegate: class {
-   func didUpdateState(to state: BuzzManagerState)
-   func didDiscover(uuid: UUID, advertisementData: [String : Any], rssi: NSNumber)
-   func didRediscover(uuid: UUID, advertisementData: [String : Any], rssi: NSNumber)
+   func didUpdateState(_ buzzManager: BuzzManager, to state: BuzzManagerState)
+   func didScanTimeout(_ buzzManager: BuzzManager)
+   func didDiscover(_ buzzManager: BuzzManager, uuid: UUID, advertisementData: [String : Any], rssi: NSNumber)
+   func didRediscover(_ buzzManager: BuzzManager, uuid: UUID, advertisementData: [String : Any], rssi: NSNumber)
 
    /// Triggered for discovery or rediscovery of peripherals which don't pass the UARTDeviceScanFilter
-   func didIgnoreDiscovery(uuid: UUID, advertisementData: [String : Any], rssi: NSNumber, wasRediscovery: Bool)
+   func didIgnoreDiscovery(_ buzzManager: BuzzManager, uuid: UUID, advertisementData: [String : Any], rssi: NSNumber, wasRediscovery: Bool)
 
-   func didDisappear(uuid: UUID)
-   func didConnectTo(uuid: UUID)
-   func didDisconnectFrom(uuid: UUID, error: Error?)
-   func didFailToConnectTo(uuid: UUID, error: Error?)
+   func didDisappear(_ buzzManager: BuzzManager, uuid: UUID)
+   func didConnectTo(_ buzzManager: BuzzManager, uuid: UUID)
+   func didDisconnectFrom(_ buzzManager: BuzzManager, uuid: UUID, error: Error?)
+   func didFailToConnectTo(_ buzzManager: BuzzManager, uuid: UUID, error: Error?)
 }
 
 public extension BuzzManagerDelegate {
-   func didUpdateState(to state: BuzzManagerState) {}
+   func didUpdateState(_ buzzManager: BuzzManager, to state: BuzzManagerState) {}
 
-   func didDiscover(uuid: UUID, advertisementData: [String : Any], rssi: NSNumber) {}
+   func didScanTimeout(_ buzzManager: BuzzManager) {}
 
-   func didRediscover(uuid: UUID, advertisementData: [String : Any], rssi: NSNumber) {}
+   func didDiscover(_ buzzManager: BuzzManager, uuid: UUID, advertisementData: [String : Any], rssi: NSNumber) {}
 
-   func didIgnoreDiscovery(uuid: UUID, advertisementData: [String : Any], rssi: NSNumber, wasRediscovery: Bool) {}
+   func didRediscover(_ buzzManager: BuzzManager, uuid: UUID, advertisementData: [String : Any], rssi: NSNumber) {}
 
-   func didDisappear(uuid: UUID) {}
+   func didIgnoreDiscovery(_ buzzManager: BuzzManager, uuid: UUID, advertisementData: [String : Any], rssi: NSNumber, wasRediscovery: Bool) {}
 
-   func didConnectTo(uuid: UUID) {}
+   func didDisappear(_ buzzManager: BuzzManager, uuid: UUID) {}
 
-   func didDisconnectFrom(uuid: UUID, error: Error?) {}
+   func didConnectTo(_ buzzManager: BuzzManager, uuid: UUID) {}
 
-   func didFailToConnectTo(uuid: UUID, error: Error?) {}
+   func didDisconnectFrom(_ buzzManager: BuzzManager, uuid: UUID, error: Error?) {}
+
+   func didFailToConnectTo(_ buzzManager: BuzzManager, uuid: UUID, error: Error?) {}
 }

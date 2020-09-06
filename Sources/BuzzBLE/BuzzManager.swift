@@ -76,14 +76,14 @@ extension BuzzManager: BLECentralManagerDelegate {
       os_log("didUpdateState(%{public}s)", log: OSLog.log, type: .debug, String(describing: state))
       switch state {
          case .poweredOn:
-            delegate?.didUpdateState(to: .enabled)
+            delegate?.didUpdateState(self, to: .enabled)
          case .poweredOff:
-            delegate?.didUpdateState(to: .disabled)
+            delegate?.didUpdateState(self, to: .disabled)
          case .unauthorized, .unknown, .resetting, .unsupported:
-            delegate?.didUpdateState(to: .error)
+            delegate?.didUpdateState(self, to: .error)
          @unknown default:
             os_log("A previously unknown central manager state occurred. CBManagerState '%{public}s' not yet handled", log: OSLog.log, type: .error, String(describing: state))
-            delegate?.didUpdateState(to: .error)
+            delegate?.didUpdateState(self, to: .error)
       }
    }
 
@@ -96,17 +96,17 @@ extension BuzzManager: BLECentralManagerDelegate {
    }
 
    public func didScanTimeout() {
-      os_log("BLECentralManagerDelegate: Scan should never timeout", log: OSLog.log, type: .error)
+      delegate?.didScanTimeout(self)
    }
 
    public func didDiscoverPeripheral(uuid: UUID, advertisementData: [String : Any], rssi: NSNumber) {
       if scanFilter.isOfType(uuid: uuid, advertisementData: advertisementData, rssi: rssi) {
-         delegate?.didDiscover(uuid: uuid,
+         delegate?.didDiscover(self, uuid: uuid,
                                advertisementData: advertisementData,
                                rssi: rssi)
       }
       else {
-         delegate?.didIgnoreDiscovery(uuid: uuid,
+         delegate?.didIgnoreDiscovery(self, uuid: uuid,
                                       advertisementData: advertisementData,
                                       rssi: rssi,
                                       wasRediscovery: false)
@@ -115,12 +115,12 @@ extension BuzzManager: BLECentralManagerDelegate {
 
    public func didRediscoverPeripheral(uuid: UUID, advertisementData: [String : Any], rssi: NSNumber) {
       if scanFilter.isOfType(uuid: uuid, advertisementData: advertisementData, rssi: rssi) {
-         delegate?.didRediscover(uuid: uuid,
+         delegate?.didRediscover(self, uuid: uuid,
                                  advertisementData: advertisementData,
                                  rssi: rssi)
       }
       else {
-         delegate?.didIgnoreDiscovery(uuid: uuid,
+         delegate?.didIgnoreDiscovery(self, uuid: uuid,
                                       advertisementData: advertisementData,
                                       rssi: rssi,
                                       wasRediscovery: true)
@@ -128,21 +128,21 @@ extension BuzzManager: BLECentralManagerDelegate {
    }
 
    public func didPeripheralDisappear(uuid: UUID) {
-      delegate?.didDisappear(uuid: uuid)
+      delegate?.didDisappear(self, uuid: uuid)
    }
 
    public func didConnectToPeripheral(peripheral: BLEPeripheral) {
       connectedDevices[peripheral.uuid] = Buzz(blePeripheral: peripheral)
-      delegate?.didConnectTo(uuid: peripheral.uuid)
+      delegate?.didConnectTo(self, uuid: peripheral.uuid)
    }
 
    public func didDisconnectFromPeripheral(uuid: UUID, error: Error?) {
       if let _ = connectedDevices.removeValue(forKey: uuid) {
-         delegate?.didDisconnectFrom(uuid: uuid, error: error)
+         delegate?.didDisconnectFrom(self, uuid: uuid, error: error)
       }
    }
 
    public func didFailToConnectToPeripheral(uuid: UUID, error: Error?) {
-      delegate?.didFailToConnectTo(uuid: uuid, error: error)
+      delegate?.didFailToConnectTo(self, uuid: uuid, error: error)
    }
 }

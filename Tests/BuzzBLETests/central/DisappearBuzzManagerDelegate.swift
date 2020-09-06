@@ -19,19 +19,19 @@ class DisappearBuzzManagerDelegate: BuzzManagerDelegate {
       self.disappearExpectation = testCase.expectation(description: "Device disappeared")
    }
 
-   func didUpdateState(to state: BuzzManagerState) {
+   func didUpdateState(_ buzzManager: BuzzManager, to state: BuzzManagerState) {
       print("DisappearBuzzManagerDelegate: Delegate received didUpdateState(\(state))")
       if state == .enabled {
          enabledExpectation.fulfill()
       }
    }
 
-   func didDiscover(uuid: UUID, advertisementData: [String : Any], rssi: NSNumber) {
+   func didDiscover(_ buzzManager: BuzzManager, uuid: UUID, advertisementData: [String : Any], rssi: NSNumber) {
       print("DisappearBuzzManagerDelegate: Delegate received didDiscover(uuid=\(uuid),advertisementData=\(advertisementData)")
       scanDiscoverSuccessExpectation.fulfill()
    }
 
-   func didDisappear(uuid: UUID) {
+   func didDisappear(_ buzzManager: BuzzManager, uuid: UUID) {
       print("DisappearBuzzManagerDelegate: Delegate received didDisappear(uuid=\(uuid))")
       disappearExpectation.fulfill()
    }

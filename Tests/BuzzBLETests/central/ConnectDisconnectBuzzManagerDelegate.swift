@@ -27,7 +27,7 @@ class ConnectDisconnectBuzzManagerDelegate: BuzzManagerDelegate {
       self.enabledExpectation.assertForOverFulfill = false
    }
 
-   func didUpdateState(to state: BuzzManagerState) {
+   func didUpdateState(_ buzzManager: BuzzManager, to state: BuzzManagerState) {
       print("ConnectDisconnectBuzzManagerDelegate received didUpdateState(\(state))")
       self.state = state
       if state == .enabled {
@@ -35,41 +35,41 @@ class ConnectDisconnectBuzzManagerDelegate: BuzzManagerDelegate {
       }
    }
 
-   func didScanTimeout() {
+   func didScanTimeout(_ buzzManager: BuzzManager) {
       XCTFail("ConnectDisconnectBuzzManagerDelegate received didScanTimeout()!")
    }
 
-   func didDiscover(uuid: UUID, advertisementData: [String : Any], rssi: NSNumber) {
+   func didDiscover(_ buzzManager: BuzzManager, uuid: UUID, advertisementData: [String : Any], rssi: NSNumber) {
       print("ConnectDisconnectBuzzManagerDelegate received didDiscover(uuid=\(uuid))")
       discoveredUUID = uuid
       scanDiscoverSuccessExpectation.fulfill()
    }
 
-   func didRediscover(uuid: UUID, advertisementData: [String : Any], rssi: NSNumber) {
+   func didRediscover(_ buzzManager: BuzzManager, uuid: UUID, advertisementData: [String : Any], rssi: NSNumber) {
       print("ConnectDisconnectBuzzManagerDelegate received didRediscover(uuid=\(uuid))")
    }
 
-   func didConnectTo(uuid: UUID) {
+   func didConnectTo(_ buzzManager: BuzzManager, uuid: UUID) {
       print("ConnectDisconnectBuzzManagerDelegate received didConnectTo(\(uuid)))")
       connectedUUID = uuid
       connectSuccessExpectation.fulfill()
    }
 
-   func didDisconnectFrom(uuid: UUID, error: Error?) {
+   func didDisconnectFrom(_ buzzManager: BuzzManager, uuid: UUID, error: Error?) {
       print("ConnectDisconnectBuzzManagerDelegate received didDisconnectFrom(\(uuid)))")
       disconnectSuccessExpectation.fulfill()
    }
 
-   func didFailToConnectTo(uuid: UUID, error: Error?) {
+   func didFailToConnectTo(_ buzzManager: BuzzManager, uuid: UUID, error: Error?) {
       print("ConnectDisconnectBuzzManagerDelegate received didFailToConnectTo for uuid \(uuid), error = \(String(describing: error))")
       XCTFail("ConnectDisconnectBuzzManagerDelegate received didFailToConnectTo(\(uuid)))")
    }
 
-   func didIgnoreDiscovery(uuid: Foundation.UUID, advertisementData: [String : Any], rssi: Foundation.NSNumber, wasRediscovery: Bool) {
+   func didIgnoreDiscovery(_ buzzManager: BuzzManager, uuid: Foundation.UUID, advertisementData: [String : Any], rssi: Foundation.NSNumber, wasRediscovery: Bool) {
       print("ConnectDisconnectBuzzManagerDelegate received didIgnoreDiscovery(\(uuid))) [wasRediscovery=\(wasRediscovery)]")
    }
 
-   func didDisappear(uuid: Foundation.UUID) {
+   func didDisappear(_ buzzManager: BuzzManager, uuid: Foundation.UUID) {
       print("ConnectDisconnectBuzzManagerDelegate received didDisappear(\(uuid)))")
    }
 
