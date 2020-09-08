@@ -107,12 +107,18 @@ public class Buzz: ManageableUARTDevice {
       sendCommand(Buzz.Command.clearMotorsQueue)
    }
 
+   /// Sets vibration to zero for all motors.
+   public func stopMotors() {
+      setMotorVibration(0, 0, 0, 0)
+   }
+
    public func setMotorVibration(_ motor0: UInt8, _ motor1: UInt8, _ motor2: UInt8, _ motor3: UInt8) {
       sendMotorsCommand(data: [motor0, motor1, motor2, motor3])
    }
 
+   // TODO: Make this not crap.  Add array size check, value bounds checks, etc.  Also other methods for sending
+   // multiple frames at once (taking MTU into account so we don't send too many frames).
    public func sendMotorsCommand(data: [UInt8]) {
-      // TODO: Make this not crap.  Add array size check, etc.
       let encodedMotorData = Data(data).base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))
       let command = Buzz.Command.vibrateMotors.description + " " + encodedMotorData + Buzz.Command.commandTerminator
       writeWithoutResponse(bytes: Array(command.utf8))
