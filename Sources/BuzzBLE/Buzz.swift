@@ -71,7 +71,7 @@ public class Buzz: ManageableUARTDevice {
 
    //MARK: - Public Methods
 
-   public func enableCommuication() {
+   public func enableCommunication() {
       _ = blePeripheral.setNotifyEnabled(onCharacteristic: UARTDeviceServicesAndCharacteristics.rxUUID)
    }
 

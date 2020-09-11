@@ -109,7 +109,7 @@ final class BuzzBLETests: XCTestCase {
          let delegate = UnknownCommandDelegate(self)
          buzz.delegate = delegate
 
-         buzz.enableCommuication()
+         buzz.enableCommunication()
          delegate.waitForIsCommunicationEnabledExpectation()
 
          XCTAssertTrue(buzz.writeWithoutResponse(bytes: Array("bogus command\n".utf8)))
@@ -131,7 +131,7 @@ final class BuzzBLETests: XCTestCase {
          let delegate = BatteryInfoDelegate(self)
          buzz.delegate = delegate
 
-         buzz.enableCommuication()
+         buzz.enableCommunication()
          delegate.waitForIsCommunicationEnabledExpectation()
 
          buzz.requestBatteryInfo()
@@ -156,7 +156,7 @@ final class BuzzBLETests: XCTestCase {
          let delegate = DeviceInfoDelegate(self)
          buzz.delegate = delegate
 
-         buzz.enableCommuication()
+         buzz.enableCommunication()
          delegate.waitForIsCommunicationEnabledExpectation()
 
          buzz.requestDeviceInfo()
@@ -181,7 +181,7 @@ final class BuzzBLETests: XCTestCase {
          // enable communication
          let commEnabledDelegate = IsCommunicationEnabledDelegate(self)
          buzz.delegate = commEnabledDelegate
-         buzz.enableCommuication()
+         buzz.enableCommunication()
          commEnabledDelegate.waitForIsCommunicationEnabledExpectation()
 
          let delegate = IsAuthorizedDelegate(self)
@@ -206,7 +206,7 @@ final class BuzzBLETests: XCTestCase {
          // enable communication
          let commEnabledDelegate = IsCommunicationEnabledDelegate(self)
          buzz.delegate = commEnabledDelegate
-         buzz.enableCommuication()
+         buzz.enableCommunication()
          commEnabledDelegate.waitForIsCommunicationEnabledExpectation()
 
          // now try to enable the mic before authorizing
@@ -265,7 +265,7 @@ final class BuzzBLETests: XCTestCase {
          // enable communication
          let commEnabledDelegate = IsCommunicationEnabledDelegate(self)
          buzz.delegate = commEnabledDelegate
-         buzz.enableCommuication()
+         buzz.enableCommunication()
          commEnabledDelegate.waitForIsCommunicationEnabledExpectation()
 
          // now try to enable the motors before authorizing
@@ -324,7 +324,7 @@ final class BuzzBLETests: XCTestCase {
          // enable communication
          let commEnabledDelegate = IsCommunicationEnabledDelegate(self)
          buzz.delegate = commEnabledDelegate
-         buzz.enableCommuication()
+         buzz.enableCommunication()
          commEnabledDelegate.waitForIsCommunicationEnabledExpectation()
 
          // now try to clear the motors queue before authorizing
@@ -366,7 +366,7 @@ final class BuzzBLETests: XCTestCase {
          // enable communication
          let commEnabledDelegate = IsCommunicationEnabledDelegate(self)
          buzz.delegate = commEnabledDelegate
-         buzz.enableCommuication()
+         buzz.enableCommunication()
          commEnabledDelegate.waitForIsCommunicationEnabledExpectation()
 
          // authorize
