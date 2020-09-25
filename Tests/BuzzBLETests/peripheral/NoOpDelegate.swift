@@ -1,5 +1,5 @@
 //
-// Created by Chris Bartley <chris@chrisbartley.com>
+// Copyright (c) Chris Bartley 2020. Licensed under the MIT license. See LICENSE file.
 //
 
 import XCTest
