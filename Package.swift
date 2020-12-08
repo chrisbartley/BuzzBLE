@@ -13,7 +13,7 @@ let package = Package(
                targets: ["BuzzBLE"]),
       ],
       dependencies: [
-         .package(url: "git@github.com:chrisbartley/BirdbrainBLE.git", "0.6.0"..<"0.7.0")
+         .package(url: "git@github.com:chrisbartley/BirdbrainBLE.git", "0.7.0"..<"0.8.0")
       ],
       targets: [
          .target(
