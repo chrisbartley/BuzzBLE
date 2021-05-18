@@ -6,8 +6,8 @@
         "repositoryURL": "git@github.com:chrisbartley/BirdbrainBLE.git",
         "state": {
           "branch": null,
-          "revision": "b9284b52f08c820a26d8d441792ab7b1c144d73f",
-          "version": "0.7.0"
+          "revision": "d7b14d4f52b1026547dc498d3f977824f609070f",
+          "version": "0.7.1"
         }
       }
     ]
