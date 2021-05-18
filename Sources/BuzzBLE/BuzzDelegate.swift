@@ -4,7 +4,7 @@
 
 import Foundation
 
-public protocol BuzzDelegate: class {
+public protocol BuzzDelegate: AnyObject {
    func buzz(_ buzz: Buzz, isCommunicationEnabled: Bool, error: Error?)
 
    func buzz(_ buzz: Buzz, isAuthorized: Bool, errorMessage: String?)

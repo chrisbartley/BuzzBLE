@@ -4,7 +4,7 @@
 
 import Foundation
 
-public protocol BuzzManagerDelegate: class {
+public protocol BuzzManagerDelegate: AnyObject {
    func didUpdateState(_ buzzManager: BuzzManager, to state: BuzzManagerState)
    func didScanTimeout(_ buzzManager: BuzzManager)
    func didDiscover(_ buzzManager: BuzzManager, uuid: UUID, advertisementData: [String : Any], rssi: NSNumber)
